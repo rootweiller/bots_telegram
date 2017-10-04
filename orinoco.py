@@ -1,9 +1,10 @@
 import telebot
 from telebot import types
 import logging
+from constants import *
 
 
-TOKEN = '359259033:AAFgJHiPsJ9nvZEW1ILl__kyFbqLlPiRvto'
+TOKEN = TOKEN
 
 # Enable Logging
 logging.basicConfig(
@@ -61,11 +62,8 @@ def command_help(m):
 @tb.message_handler(commands=['conversar'])
 def command_conversar(m):
 	cid = m.chat.id
-
-	text_help = 'Me gusta conversar, pero debo conocerte antes. como te llamas'
-
-	tb.send_message(cid, text_help)
-
-
+	markup = types.ForceReply(selective=False)
+	text_help = 'Me gusta conversar, pero debo conocerte antes. como te llamas?'
+	tb.send_message(cid, text_help, reply_markup=markup)
 
 tb.polling(none_stop=True)
